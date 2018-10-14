@@ -1,0 +1,27 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Restaurace u vyjícího vlka</title>
+
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="shortcut icon" href="{$basePath}/assets/img/ico.png">
+	<meta name="viewport" content="width=device-width">
+	{block head}{/block}
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	{include content}
+
+	{block scripts}
+	{/block}
+</body>
+</html>

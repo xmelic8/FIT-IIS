@@ -1,0 +1,108 @@
+{block content}
+<section id="portfolio">
+    <div class="container">
+       <div class="row">
+            <div class="col-lg-12 text-center">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                       <div class="navbar-header">
+                           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                           </button>
+                           <a class="navbar-brand" href="{link Service:}">{$_username}</a>
+                        </div>
+                        
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button">Rezervace<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                       <li><a href="{link Reservation:new}">Nová rezervace</a></li>
+                                        <li><a href="{link Reservation:tableshow}">Stůl</a></li>
+                                        <li><a href="{link Reservation:roomshow}">Místnost</a></li>
+                                        <li><a href="{link Reservation:restaurantshow}">Celá restaurace</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button">Objednávky<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{plink Order:create}">Vytvořit objednávku</a></li>
+                                        <li><a href="{link Order:}">Seznam objednávek</a></li>
+                                        <li><a href="{link Order:completed}">Seznam dokončených objednávek</a></li>
+                                          {if $_user->isInRole('Obsluha')!= TRUE}
+                                        <li><a href="{link Order:deleted}">Seznam zrušených objednávek</a></li>
+                                        {/if}
+                                    </ul>
+                                </li>
+                            </ul>
+                        
+                            <ul class="nav navbar-nav navbar-right">
+                                {if $_user->isInRole('Vedouci')== TRUE or $_user->isInRole('Majitel')== TRUE}
+    
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button">Pohled<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{plink Supervisor:}">Vedouci</a></li>
+                                        {if $_user->isInRole('Majitel')== TRUE}
+                                        <li><a href="{plink Owner:}">Majitel</a></li>
+                                        {/if}
+                                    </ul>
+                                </li>
+                                {/if}
+                                <li><a href="{plink Sign:out}" class="btn btn-danger">
+                                         Odhlášení 
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                       <div class="row col-lg-3" ></div>
+                    </div>
+                </nav>
+            </div>
+       </div>
+       <div class="row col-lg-6" >
+       
+       </div>
+    </div>
+</section>
+{/block}
+
+{block head}
+    <link href="{$basePath}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="{$basePath}/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{$basePath}/assets/css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{$basePath}/assets/js/bootstrap.min.js"></script>
+    <script src="{$basePath}/assets/js/custom.js"></script>
+{/block}
+
+{block scripts}
+{include parent}
+<script src="https://files.nette.org/sandbox/jush.js"></script>
+<script>
+	jush.create_links = false;
+	jush.highlight_tag('code');
+	$('code.jush').each(function(){ $(this).html($(this).html().replace(/\x7B[/$\w].*?\}/g, '<span class="jush-latte">$&</span>')) });
+
+	$('a[href^=#]').click(function(){
+		$('html,body').animate({ scrollTop: $($(this).attr('href')).show().offset().top - 5 }, 'fast');
+		return false;
+	});
+   
+   function potvrzeni(){
+      okno=window.confirm("Opravdu chcete položku smazat?");
+      if(okno) window.alert("(c) Šimon Grimmich");
+   }
+</script>
+{/block}
+
+{* or use {include '../components/form.latte', form => signInForm} *}

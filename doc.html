@@ -1,0 +1,79 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Název zadání</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>První jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xmelic17@stud.fit.vutbr.cz">xmelic17@stud.fit.vutbr.cz</a> -
+		Uživatelské rozhraní a uživatelské rozhraní pro vypysů dat z databáze
+	</dd>
+	<dd>Druhé jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xkonia00@stud.fit.vutbr.cz">xkonia00@stud.fit.vutbr.cz</a> - 
+		Správa uživatelů a uživatelské rozhraní pro editaci záznamu
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://czrestaurace.php5.cz/~xmelic17/IIS">http://czrestaurace.php5.cz/~xmelic17/IIS</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>MikeR</td><td>123</td><td>Majitel</td></tr>
+<tr><td>PavelN</td><td>123</td><td>Vedoucí</td></tr>
+<tr><td>MiladaH</td><td>123</td><td>Obsluha</td></tr>
+<tr><td>MilanR</td><td>123</td><td>Obsluha</td></tr>
+</table>
+
+<h2>Implementace</h2>
+
+<p>
+Rozhodli jsme se implementovat tento projekt pomocí frameworku Nette, který už zahrnuje třídy pro komunikaci s databází, vytváření formuláře, autentizaci a autorizaci uživatelů.</p>
+<p>Skript /app/model/SignManger.php obsluhuje autorizaci uživatelů do informačního systému a autorizace se řeší v každém pressenteru zvlášť.</p>
+<p>Presenter Service (skript /app/Presenter/ServicePresenter.php) zajišťuje vypsání výchozí stránky pro uživatele s právem „Obsluha“.</p>
+<p>Presenter Supervisior (skript /app/Presenter/Supervisior Presenter.php) zajišťuje vypsání výchozí stránky pro uživatele s právem „Vedouci“.</p>
+<p>Presenter Goods (skript /app/Presenter/GoodsPresenter.php) zajišťuje vypsání stránky pro úpravu, mazaní a vytvářeni položek v tabulce tabZbozi.</p>
+<p>Presenter Homepage(skript /app/Presenter/HomepagePresenter.php) zajišťuje přesměrování uživatele na jeho výchozí stránku, nebo na stránku kde má možnost se přihlásit.</p>
+<p>Presenter Menu (skript /app/Presenter/MenuPresenter.php) zajišťuje vypsání, editaci , vytváření a mazaní jídelních lístků a přidávání,mazaní a úpravy položek jídelního lístku.</p>
+<p>Presenter Reservation (skript /app/Presenter/ReservationPresenter.php) zajišťuje vypsání, editaci , vytváření a mazaní rezervací stolu, místnosti a restaurace.</p>
+<p>Presenter Room (skript /app/Presenter/RoomPresenter.php) zajišťuje vypsání, editaci , vytváření a mazaní místnosti restaurace.</p>
+<p>Presenter Service (skript /app/Presenter/ServicePresenter.php) zajišťuje vypsání hlavní stránky obsluhy.</p>
+<p>Presenter Sign (skript /app/Presenter/SignPresenter.php) zajišťuje vypsání stránky kde se zadávají přihlašovací udaje.</p>
+<p>Presenter Summary (skript /app/Presenter/SummaryPresenter.php) zajišťuje vypsání přehledu.</p>
+<p>Presenter Table (skript /app/Presenter/TablePresenter.php) zajišťuje vypsání, editaci , vytváření a mazaní stolu restaurace.</p>
+<p>SignFormFactory (skript /app/forms/SignFormFactory.php) vytváří formulář pro přihlašování uživatelů.</p>
+<p>newMenuItem (skript /app/forms/newMenuItem.php) vytváří formulář pro přidávání položek do jídelního lístku.</p>
+<p>Do tabulek tabdoklady,tabjidelnilistek,tablokace,tabobjednavka,tabpohyby,tabpolozkaobjednavka,tabpolozkyjl,tabreceptury,tabrezervace,tabskladkarta,tabstul,tabzamestnanec,tabzamestnaneclokace,tabzbozi jsme přidali hodnotu „aktivní“ pro zachování integrity dat v tabulce po odstranění nějaké z položek z databáze a pro uchování historie smazaných dat. A také do tabulky tabzamestnanec jsme přidali hodnoty username a passwd pro ověření přihlášení uživatele.</p>
+
+
+<h2>Instalace</h2>
+<ul>
+<li>Stručně popište postup instalace na server</li>
+<li>Softwarové požadavky: PHP 5.5.3.0 Apache 2.4.17 10.0.17MariaDB Nette 2.3.8</li>
+<li>Rozbali soubor a rozbalená data nahrát na server</li>
+<li>Vytvořit si na mysql serveru databázi z názvem test, pro nastavení jiného jména databáze musíte do souboru /app/config/config.local.neon a nastavit si tam adresu a název databáze, jméno a heslo uživatele databáze</li>
+<li>Pomocí přiloženého souboru script.sql nahrát do databáze test tabulky a data</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Z časových důvodů nebylo implementováno přidaní/odebraní/upravení objednávky a rezervace, vystavení učtu provedení kalkulace, přidání/odstranění stolu a místnosti,vytvoření přehledu </p>
+
+</body>
+</html>
